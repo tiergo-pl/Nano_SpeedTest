@@ -8,7 +8,7 @@
 #define SQUARE_OUT PB2
 #define DEBUG_PIN1 PB1
 
-#define PERIOD_16BIT 20000
+#define PERIOD_16BIT 10000
 #define PERIOD_CORRECTION_16BIT 0
 #define PERIOD_8BIT 100
 
@@ -58,16 +58,11 @@ int main()
     ATOMIC_BLOCK(ATOMIC_FORCEON)
     {
 
-      PORTB |= _BV(DEBUG_PIN1);
-      __builtin_avr_delay_cycles(2);
-      PORTB &= ~_BV(DEBUG_PIN1);
       sysClk8 = sysClk8Master;
       sysClk16 = sysClk16Master;
-      PORTB |= _BV(DEBUG_PIN1);
-      PORTB &= ~_BV(DEBUG_PIN1);
     }
     
-
+/*
     for (uint8_t i = 0; i < 10; i++)
     {
       PORTB |= _BV(SQUARE_OUT);
@@ -78,15 +73,53 @@ int main()
       PORTB &= ~_BV(SQUARE_OUT);
       __builtin_avr_delay_cycles(10);
     }
+    */
 
-    int16_t diff = sysClk16 - sysClk16Prev;
-    if (diff > PERIOD_16BIT)
+    int16_t diff = sysClk16 - sysClk16Prev - PERIOD_16BIT;
+    if (diff >= 0)
     {
       sysClk16Prev = sysClk16 + diff + PERIOD_CORRECTION_16BIT;
       PINB |= _BV(LED_BUILTIN); // writing to PINx toggles output
     }
-    
-    PORTB |= _BV(DEBUG_PIN1);
-    PORTB &= ~_BV(DEBUG_PIN1);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
+    PORTB |= _BV(SQUARE_OUT);
+    PORTB &= ~_BV(SQUARE_OUT);
   }
 }
